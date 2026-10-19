@@ -6,7 +6,7 @@ public class JobManager
     // Samling av alla ansökningar
     public List<JobApplication> Applications = new List<JobApplication>();
 
-    // ---------- Grundfunktioner (finns redan på main) ----------
+   
 
     public void AddJob(JobApplication job)
     {
