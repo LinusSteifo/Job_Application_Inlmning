@@ -141,7 +141,7 @@ public class JobManager
 
         if (!gamla.Any())
         {
-            Console.WriteLine("  Inga.");
+            Console.WriteLine(" Inga.");
             return;
         }
 
