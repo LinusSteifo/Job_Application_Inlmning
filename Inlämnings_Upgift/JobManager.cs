@@ -3,7 +3,10 @@ using System.Linq;
 
 public class JobManager
 {
+    // Samling av alla ansökningar
     public List<JobApplication> Applications = new List<JobApplication>();
+
+    // ---------- Grundfunktioner (finns redan på main) ----------
 
     public void AddJob(JobApplication job)
     {
@@ -56,6 +59,9 @@ public class JobManager
         }
     }
 
+    // ---------- NYTT i feature-linq ----------
+
+    // LINQ: Where – filtrerar ansökningar på en viss status
     public void ShowByStatus(Status status)
     {
         var filtered = Applications.Where(a => a.Status == status);
@@ -72,6 +78,11 @@ public class JobManager
         }
     }
 
+            Console.WriteLine(a.GetSummary());
+        }
+    }
+
+    // LINQ: OrderBy – sorterar ansökningar efter datum (äldst först)
     public void ShowSortedByDate()
     {
         var sorted = Applications.OrderBy(a => a.ApplicationDate);
@@ -87,12 +98,24 @@ public class JobManager
     {
         Console.WriteLine($"Totalt antal ansökningar: {Applications.Count}");
 
+            Console.WriteLine($"{a.ApplicationDate:yyyy-MM-dd}  {a.GetSummary()}");
+        }
+    }
+
+    // LINQ: Count, GroupBy, Where, Average – visar statistik
+    public void ShowStatistics()
+    {
+        // Totalt antal
+        Console.WriteLine($"Totalt antal ansökningar: {Applications.Count}");
+
+        // Antal per status
         var perStatus = Applications.GroupBy(a => a.Status);
         foreach (var grupp in perStatus)
         {
             Console.WriteLine($"  {grupp.Key}: {grupp.Count()} st");
         }
 
+        // Genomsnittlig svarstid (bara ansökningar som fått svar)
         var medSvar = Applications.Where(a => a.ResponseDate != null);
 
         if (medSvar.Any())
@@ -108,6 +131,7 @@ public class JobManager
         }
     }
 
+    // Extra filter (VG): ansökningar utan svar som är äldre än 14 dagar
     public void ShowOldUnanswered()
     {
         var gamla = Applications
@@ -125,6 +149,7 @@ public class JobManager
         {
             Console.Write("  "); // NYTT
             a.PrintColored();    // NYTT
+            Console.WriteLine($"  {a.GetSummary()}");
         }
     }
 }

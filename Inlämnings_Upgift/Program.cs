@@ -1,5 +1,4 @@
-﻿
-JobManager manager = new JobManager();
+﻿JobManager manager = new JobManager();
 bool kor = true;
 
 while (kor)
@@ -27,15 +26,24 @@ while (kor)
             manager.ShowAll();
             break;
         case "3":
-            // kommer i LINQ-branchen
+            Console.Write("Vilken status vill du filtrera på (Applied/Interview/Offer/Rejected)? ");
+            if (Enum.TryParse<Status>(Console.ReadLine(), true, out Status filterStatus))
+            {
+                manager.ShowByStatus(filterStatus);
+            }
+            else
+            {
+                Console.WriteLine("Ogiltig status.");
+            }
             break;
         case "4":
-            // kommer i LINQ-branchen
+            manager.ShowSortedByDate();
             break;
         case "5":
-            // kommer i LINQ-branchen
+            manager.ShowStatistics();
+            Console.WriteLine();
+            manager.ShowOldUnanswered();
             break;
-        case "6":
             Console.Write("Vilket företag vill du uppdatera? ");
             string foretag = Console.ReadLine();
             Console.Write("Ny status (Applied/Interview/Offer/Rejected): ");
