@@ -17,8 +17,7 @@
         return $"{PositionTitle} hos {CompanyName} – Status: {Status} ({GetDaysSinceApplied()} dagar sedan)";
     }
 
-
-    // NY metod: skriver ut sammanfattningen i en färg som beror på status
+    // NYTT: skriver ut sammanfattningen i en färg som beror på status
     public void PrintColored()
     {
         Console.ForegroundColor = Status switch
@@ -33,4 +32,3 @@
         Console.ResetColor();
     }
 }
-
