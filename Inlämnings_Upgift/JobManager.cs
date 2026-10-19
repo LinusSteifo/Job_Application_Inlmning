@@ -23,7 +23,7 @@ public class JobManager
 
         foreach (JobApplication a in Applications)
         {
-            Console.WriteLine(a.GetSummary());
+            a.PrintColored(); // NYTT (var: Console.WriteLine(a.GetSummary());)
         }
     }
 
@@ -74,6 +74,10 @@ public class JobManager
 
         foreach (var a in filtered)
         {
+            a.PrintColored(); // NYTT
+        }
+    }
+
             Console.WriteLine(a.GetSummary());
         }
     }
@@ -85,6 +89,15 @@ public class JobManager
 
         foreach (var a in sorted)
         {
+            Console.Write($"{a.ApplicationDate:yyyy-MM-dd}  "); // NYTT (Write istället för WriteLine)
+            a.PrintColored();                                    // NYTT
+        }
+    }
+
+    public void ShowStatistics()
+    {
+        Console.WriteLine($"Totalt antal ansökningar: {Applications.Count}");
+
             Console.WriteLine($"{a.ApplicationDate:yyyy-MM-dd}  {a.GetSummary()}");
         }
     }
@@ -134,6 +147,8 @@ public class JobManager
 
         foreach (var a in gamla)
         {
+            Console.Write("  "); // NYTT
+            a.PrintColored();    // NYTT
             Console.WriteLine($"  {a.GetSummary()}");
         }
     }
