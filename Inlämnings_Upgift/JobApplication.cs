@@ -16,4 +16,19 @@
     {
         return $"{PositionTitle} hos {CompanyName} – Status: {Status} ({GetDaysSinceApplied()} dagar sedan)";
     }
+
+    // NYTT: skriver ut sammanfattningen i en färg som beror på status
+    public void PrintColored()
+    {
+        Console.ForegroundColor = Status switch
+        {
+            Status.Offer => ConsoleColor.Green,
+            Status.Rejected => ConsoleColor.Red,
+            Status.Interview => ConsoleColor.Yellow,
+            _ => ConsoleColor.White
+        };
+
+        Console.WriteLine(GetSummary());
+        Console.ResetColor();
+    }
 }
